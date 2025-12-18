@@ -109,7 +109,7 @@ void main() async {
   final hash = await client.sendUserOperation(
     calls: [
       Call(
-        to: EthAddress('0x...'),
+        to: EthereumAddress.fromHex('0x...'),
         value: BigInt.zero,
         data: '0x',
       ),

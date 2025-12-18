@@ -8,7 +8,7 @@ void main() {
   const testOwnerAddress = '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266';
 
   // Mock address for unit tests (avoids RPC calls)
-  final mockAddress = EthAddress('0x1234567890123456789012345678901234567890');
+  final mockAddress = EthereumAddress.fromHex('0x1234567890123456789012345678901234567890');
 
   group('KernelVersion', () {
     test('v0_2_4 has correct value', () {
@@ -170,7 +170,7 @@ void main() {
 
       test('different index produces different address', () async {
         final mockAddress2 =
-            EthAddress('0x2222222222222222222222222222222222222222');
+            EthereumAddress.fromHex('0x2222222222222222222222222222222222222222');
         final account2 = createKernelSmartAccount(
           owner: owner,
           chainId: BigInt.from(1),
@@ -240,7 +240,7 @@ void main() {
     group('call encoding', () {
       test('encodes single call with ERC-7579', () {
         final call = Call(
-          to: EthAddress('0x1234567890123456789012345678901234567890'),
+          to: EthereumAddress.fromHex('0x1234567890123456789012345678901234567890'),
           value: BigInt.zero,
           data: '0x',
         );
@@ -258,12 +258,12 @@ void main() {
       test('encodes batch calls with ERC-7579', () {
         final calls = [
           Call(
-            to: EthAddress('0x1111111111111111111111111111111111111111'),
+            to: EthereumAddress.fromHex('0x1111111111111111111111111111111111111111'),
             value: BigInt.zero,
             data: '0x',
           ),
           Call(
-            to: EthAddress('0x2222222222222222222222222222222222222222'),
+            to: EthereumAddress.fromHex('0x2222222222222222222222222222222222222222'),
             value: BigInt.from(100),
             data: '0xabcd',
           ),
@@ -281,7 +281,7 @@ void main() {
       test('single call optimization in encodeCalls', () {
         final calls = [
           Call(
-            to: EthAddress('0x1234567890123456789012345678901234567890'),
+            to: EthereumAddress.fromHex('0x1234567890123456789012345678901234567890'),
             value: BigInt.zero,
             data: '0x',
           ),
@@ -327,7 +327,7 @@ void main() {
           nonce: BigInt.zero,
           callData: account.encodeCall(
             Call(
-              to: EthAddress('0x1234567890123456789012345678901234567890'),
+              to: EthereumAddress.fromHex('0x1234567890123456789012345678901234567890'),
               value: BigInt.zero,
               data: '0x',
             ),
@@ -416,9 +416,9 @@ void main() {
 
       test('different from v0.3.1 address', () async {
         final mockAddress024 =
-            EthAddress('0x1111111111111111111111111111111111111111');
+            EthereumAddress.fromHex('0x1111111111111111111111111111111111111111');
         final mockAddress031 =
-            EthAddress('0x2222222222222222222222222222222222222222');
+            EthereumAddress.fromHex('0x2222222222222222222222222222222222222222');
         final v024Account = createKernelSmartAccount(
           owner: owner,
           chainId: BigInt.from(1),
@@ -467,7 +467,7 @@ void main() {
     group('call encoding', () {
       test('encodes single call with v0.2 execute', () {
         final call = Call(
-          to: EthAddress('0x1234567890123456789012345678901234567890'),
+          to: EthereumAddress.fromHex('0x1234567890123456789012345678901234567890'),
           value: BigInt.zero,
           data: '0x',
         );
@@ -485,12 +485,12 @@ void main() {
       test('encodes batch calls with v0.2 executeBatch', () {
         final calls = [
           Call(
-            to: EthAddress('0x1111111111111111111111111111111111111111'),
+            to: EthereumAddress.fromHex('0x1111111111111111111111111111111111111111'),
             value: BigInt.zero,
             data: '0x',
           ),
           Call(
-            to: EthAddress('0x2222222222222222222222222222222222222222'),
+            to: EthereumAddress.fromHex('0x2222222222222222222222222222222222222222'),
             value: BigInt.from(100),
             data: '0xabcd',
           ),

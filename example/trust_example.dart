@@ -66,7 +66,7 @@ void main(List<String> args) async {
   final initCode = await account.getInitCode();
 
   // Resolve accurate address via EntryPoint simulation
-  EthAddress accountAddress;
+  EthereumAddress accountAddress;
   try {
     accountAddress = await publicClient.getSenderAddress(
       initCode: initCode,
@@ -157,7 +157,6 @@ void main(List<String> args) async {
       maxPriorityFeePerGas: gasPrices.fast.maxPriorityFeePerGas,
       sender: accountAddress,
       nonce: nonce,
-      includeFactoryData: !isDeployed,
     );
   } on BundlerRpcError catch (e) {
     if (e.message.contains('AA') || e.message.contains('initCode')) {
@@ -177,7 +176,7 @@ void main(List<String> args) async {
   print('Verification gas limit: ${userOp.verificationGasLimit}');
 
   if (userOp.paymasterAndData != '0x' && userOp.paymasterAndData.length > 2) {
-    final paymasterAddress = EthAddress(
+    final paymasterAddress = EthereumAddress.fromHex(
       '0x${userOp.paymasterAndData.substring(2, 42)}',
     );
     print('Paymaster: ${paymasterAddress.checksummed} (SPONSORED)');

@@ -231,7 +231,7 @@ void main() {
         );
 
         final userOp = UserOperationV07(
-          sender: EthAddress('0x1234567890123456789012345678901234567890'),
+          sender: EthereumAddress.fromHex('0x1234567890123456789012345678901234567890'),
           nonce: BigInt.one,
           callData: '0xabcdef',
           callGasLimit: BigInt.from(100000),
@@ -243,7 +243,7 @@ void main() {
         );
 
         final inflator =
-            EthAddress('0xabcdef1234567890abcdef1234567890abcdef12');
+            EthereumAddress.fromHex('0xabcdef1234567890abcdef1234567890abcdef12');
         const compressedCalldata = '0xcompresseddata123';
 
         final hash = await client.sendCompressedUserOperation(
@@ -275,7 +275,7 @@ void main() {
         );
 
         final userOp = UserOperationV07(
-          sender: EthAddress('0x1234567890123456789012345678901234567890'),
+          sender: EthereumAddress.fromHex('0x1234567890123456789012345678901234567890'),
           nonce: BigInt.one,
           callData: '0xabcdef',
           callGasLimit: BigInt.from(100000),
@@ -284,9 +284,9 @@ void main() {
           maxFeePerGas: BigInt.from(1000000000),
           maxPriorityFeePerGas: BigInt.from(100000000),
           signature: '0xsignature',
-          factory: EthAddress('0xaaaa567890123456789012345678901234567890'),
+          factory: EthereumAddress.fromHex('0xaaaa567890123456789012345678901234567890'),
           factoryData: '0xfactorydata',
-          paymaster: EthAddress('0xbbbb567890123456789012345678901234567890'),
+          paymaster: EthereumAddress.fromHex('0xbbbb567890123456789012345678901234567890'),
           paymasterData: '0xpaymasterdata',
           paymasterVerificationGasLimit: BigInt.from(50000),
           paymasterPostOpGasLimit: BigInt.from(25000),
@@ -294,7 +294,7 @@ void main() {
 
         await client.sendCompressedUserOperation(
           userOp,
-          EthAddress('0xabcdef1234567890abcdef1234567890abcdef12'),
+          EthereumAddress.fromHex('0xabcdef1234567890abcdef1234567890abcdef12'),
           '0xcompressed',
         );
 
@@ -320,7 +320,7 @@ void main() {
         );
 
         final userOp = UserOperationV07(
-          sender: EthAddress('0x1234567890123456789012345678901234567890'),
+          sender: EthereumAddress.fromHex('0x1234567890123456789012345678901234567890'),
           nonce: BigInt.one,
           callData: '0xabcdef',
           callGasLimit: BigInt.from(100000),
@@ -352,7 +352,7 @@ void main() {
         );
 
         final userOp = UserOperationV07(
-          sender: EthAddress('0x1234567890123456789012345678901234567890'),
+          sender: EthereumAddress.fromHex('0x1234567890123456789012345678901234567890'),
           nonce: BigInt.one,
           callData: '0xabcdef',
           callGasLimit: BigInt.zero,
@@ -514,7 +514,7 @@ void main() {
       );
 
       final userOp = UserOperationV07(
-        sender: EthAddress('0x1234567890123456789012345678901234567890'),
+        sender: EthereumAddress.fromHex('0x1234567890123456789012345678901234567890'),
         nonce: BigInt.one,
         callData: '0xabcdef',
         callGasLimit: BigInt.from(100000),
@@ -527,7 +527,7 @@ void main() {
 
       final cost = await client.estimateErc20PaymasterCost(
         userOperation: userOp,
-        token: EthAddress('0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'), // USDC
+        token: EthereumAddress.fromHex('0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'), // USDC
       );
 
       expect(cost.costInToken, equals(BigInt.from(100000000)));
@@ -549,7 +549,7 @@ void main() {
       );
 
       final userOp = UserOperationV07(
-        sender: EthAddress('0x1234567890123456789012345678901234567890'),
+        sender: EthereumAddress.fromHex('0x1234567890123456789012345678901234567890'),
         nonce: BigInt.from(5),
         callData: '0xabcdef123456',
         callGasLimit: BigInt.from(100000),
@@ -561,7 +561,7 @@ void main() {
       );
 
       final tokenAddress =
-          EthAddress('0xdAC17F958D2ee523a2206206994597C13D831ec7'); // USDT
+          EthereumAddress.fromHex('0xdAC17F958D2ee523a2206206994597C13D831ec7'); // USDT
 
       await client.estimateErc20PaymasterCost(
         userOperation: userOp,
@@ -621,7 +621,7 @@ void main() {
       );
 
       final userOp = UserOperationV07(
-        sender: EthAddress('0x1234567890123456789012345678901234567890'),
+        sender: EthereumAddress.fromHex('0x1234567890123456789012345678901234567890'),
         nonce: BigInt.one,
         callData: '0xabcdef',
         callGasLimit: BigInt.from(100000),
@@ -669,7 +669,7 @@ void main() {
       );
 
       final userOp = UserOperationV07(
-        sender: EthAddress('0x1234567890123456789012345678901234567890'),
+        sender: EthereumAddress.fromHex('0x1234567890123456789012345678901234567890'),
         nonce: BigInt.one,
         callData: '0xabcdef',
         callGasLimit: BigInt.from(100000),
@@ -699,7 +699,7 @@ void main() {
       );
 
       final userOp = UserOperationV07(
-        sender: EthAddress('0x1234567890123456789012345678901234567890'),
+        sender: EthereumAddress.fromHex('0x1234567890123456789012345678901234567890'),
         nonce: BigInt.one,
         callData: '0xabcdef',
         callGasLimit: BigInt.from(100000),
@@ -729,7 +729,7 @@ void main() {
       );
 
       final userOp = UserOperationV07(
-        sender: EthAddress('0x1234567890123456789012345678901234567890'),
+        sender: EthereumAddress.fromHex('0x1234567890123456789012345678901234567890'),
         nonce: BigInt.from(42),
         callData: '0xabcdef',
         callGasLimit: BigInt.from(100000),

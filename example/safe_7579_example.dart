@@ -154,7 +154,6 @@ void main(List<String> args) async {
       maxPriorityFeePerGas: gasPrices.fast.maxPriorityFeePerGas,
       sender: accountAddress,
       nonce: nonce,
-      includeFactoryData: !isDeployed,
     );
   } on BundlerRpcError catch (e) {
     if (e.message.contains('AA') || e.message.contains('initCode')) {

@@ -133,7 +133,6 @@ void main(List<String> args) async {
       maxPriorityFeePerGas: gasPrices.fast.maxPriorityFeePerGas,
       sender: accountAddress, // Use EntryPoint-verified address
       nonce: nonce, // Use actual nonce from EntryPoint
-      includeFactoryData: !isDeployed, // Skip factory data if already deployed
     );
   } on BundlerRpcError catch (e) {
     if (e.message.contains('AA') || e.message.contains('initCode')) {

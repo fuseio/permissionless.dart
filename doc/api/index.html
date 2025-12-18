@@ -203,7 +203,7 @@ void main() async {
   final hash = await client.sendUserOperation(
     calls: [
       Call(
-        to: EthAddress('0x...'),
+        to: EthereumAddress.fromHex('0x...'),
         value: BigInt.zero,
         data: '0x',
       ),
@@ -698,7 +698,7 @@ final allowanceOverride = erc20AllowanceOverride(
 <footer>
   <span class="no-break">
     permissionless
-      0.1.0
+      0.1.1
   </span>
   
 </footer>

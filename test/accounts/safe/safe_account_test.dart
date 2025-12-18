@@ -7,10 +7,10 @@ void main() {
   const testPrivateKey =
       '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80';
   final testOwnerAddress =
-      EthAddress('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266');
+      EthereumAddress.fromHex('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266');
 
   // Mock address for unit tests (avoids RPC calls)
-  final mockAddress = EthAddress('0x1234567890123456789012345678901234567890');
+  final mockAddress = EthereumAddress.fromHex('0x1234567890123456789012345678901234567890');
 
   group('SafeSmartAccount', () {
     group('creation', () {
@@ -145,9 +145,9 @@ void main() {
       test('different salt produces different address', () async {
         final owner = PrivateKeyOwner(testPrivateKey);
         final mockAddress1 =
-            EthAddress('0x1111111111111111111111111111111111111111');
+            EthereumAddress.fromHex('0x1111111111111111111111111111111111111111');
         final mockAddress2 =
-            EthAddress('0x2222222222222222222222222222222222222222');
+            EthereumAddress.fromHex('0x2222222222222222222222222222222222222222');
 
         final account1 = createSafeSmartAccount(
           owners: [owner],
@@ -174,9 +174,9 @@ void main() {
           '0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d',
         );
         final mockAddress1 =
-            EthAddress('0x1111111111111111111111111111111111111111');
+            EthereumAddress.fromHex('0x1111111111111111111111111111111111111111');
         final mockAddress2 =
-            EthAddress('0x2222222222222222222222222222222222222222');
+            EthereumAddress.fromHex('0x2222222222222222222222222222222222222222');
 
         final account1 = createSafeSmartAccount(
           owners: [owner1],
@@ -263,7 +263,7 @@ void main() {
 
         final encoded = account.encodeCall(
           Call(
-            to: EthAddress('0x1234567890123456789012345678901234567890'),
+            to: EthereumAddress.fromHex('0x1234567890123456789012345678901234567890'),
             value: BigInt.from(1000000000000000000), // 1 ETH
             data: '0x',
           ),
@@ -284,7 +284,7 @@ void main() {
 
         final encoded = account.encodeCall(
           Call(
-            to: EthAddress('0x1234567890123456789012345678901234567890'),
+            to: EthereumAddress.fromHex('0x1234567890123456789012345678901234567890'),
             value: BigInt.zero,
             data:
                 '0xa9059cbb0000000000000000000000001234567890123456789012345678901234567890000000000000000000000000000000000000000000000000000000000000000a',
@@ -305,7 +305,7 @@ void main() {
         );
 
         final call = Call(
-          to: EthAddress('0x1234567890123456789012345678901234567890'),
+          to: EthereumAddress.fromHex('0x1234567890123456789012345678901234567890'),
           value: BigInt.from(1000),
         );
 
@@ -325,11 +325,11 @@ void main() {
 
         final encoded = account.encodeCalls([
           Call(
-            to: EthAddress('0x1234567890123456789012345678901234567890'),
+            to: EthereumAddress.fromHex('0x1234567890123456789012345678901234567890'),
             value: BigInt.from(1000),
           ),
           Call(
-            to: EthAddress('0x0987654321098765432109876543210987654321'),
+            to: EthereumAddress.fromHex('0x0987654321098765432109876543210987654321'),
             value: BigInt.from(2000),
           ),
         ]);
@@ -522,7 +522,7 @@ void main() {
     const testPrivateKey =
         '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80';
     final mockAddress =
-        EthAddress('0x1234567890123456789012345678901234567890');
+        EthereumAddress.fromHex('0x1234567890123456789012345678901234567890');
 
     group('creation', () {
       test('creates account with ERC-7579 enabled', () {
@@ -565,7 +565,7 @@ void main() {
       test('creates account with module configurations', () {
         final owner = PrivateKeyOwner(testPrivateKey);
         final validatorAddress =
-            EthAddress('0xabcdef1234567890abcdef1234567890abcdef12');
+            EthereumAddress.fromHex('0xabcdef1234567890abcdef1234567890abcdef12');
 
         final account = createSafeSmartAccount(
           owners: [owner],
@@ -685,7 +685,7 @@ void main() {
 
         final encoded = account.encodeCall(
           Call(
-            to: EthAddress('0x1234567890123456789012345678901234567890'),
+            to: EthereumAddress.fromHex('0x1234567890123456789012345678901234567890'),
             value: BigInt.from(1000),
             data: '0x',
           ),
@@ -705,7 +705,7 @@ void main() {
 
         final encoded = account.encodeCall(
           Call(
-            to: EthAddress('0x1234567890123456789012345678901234567890'),
+            to: EthereumAddress.fromHex('0x1234567890123456789012345678901234567890'),
             value: BigInt.from(1000),
             data: '0x',
           ),
@@ -726,11 +726,11 @@ void main() {
 
         final encoded = account.encodeCalls([
           Call(
-            to: EthAddress('0x1234567890123456789012345678901234567890'),
+            to: EthereumAddress.fromHex('0x1234567890123456789012345678901234567890'),
             value: BigInt.from(1000),
           ),
           Call(
-            to: EthAddress('0x0987654321098765432109876543210987654321'),
+            to: EthereumAddress.fromHex('0x0987654321098765432109876543210987654321'),
             value: BigInt.from(2000),
           ),
         ]);
@@ -784,7 +784,7 @@ void main() {
 
         final encoded = account.encodeCallsForDeployment([
           Call(
-            to: EthAddress('0x1234567890123456789012345678901234567890'),
+            to: EthereumAddress.fromHex('0x1234567890123456789012345678901234567890'),
             value: BigInt.from(1000),
             data: '0x',
           ),
@@ -804,7 +804,7 @@ void main() {
         );
 
         final call = Call(
-          to: EthAddress('0x1234567890123456789012345678901234567890'),
+          to: EthereumAddress.fromHex('0x1234567890123456789012345678901234567890'),
           value: BigInt.from(1000),
           data: '0x',
         );
@@ -828,7 +828,7 @@ void main() {
         );
 
         final call = Call(
-          to: EthAddress('0x1234567890123456789012345678901234567890'),
+          to: EthereumAddress.fromHex('0x1234567890123456789012345678901234567890'),
           value: BigInt.from(1000),
           data: '0x',
         );
@@ -843,7 +843,7 @@ void main() {
       test('includes full InitData in setupSafe encoding', () {
         final owner = PrivateKeyOwner(testPrivateKey);
         final validatorAddress =
-            EthAddress('0xabcdef1234567890abcdef1234567890abcdef12');
+            EthereumAddress.fromHex('0xabcdef1234567890abcdef1234567890abcdef12');
 
         final account = createSafeSmartAccount(
           owners: [owner],
@@ -859,7 +859,7 @@ void main() {
 
         final encoded = account.encodeCallsForDeployment([
           Call(
-            to: EthAddress('0x1234567890123456789012345678901234567890'),
+            to: EthereumAddress.fromHex('0x1234567890123456789012345678901234567890'),
             value: BigInt.zero,
             data: '0x',
           ),
@@ -906,7 +906,7 @@ void main() {
           chainId: BigInt.from(1),
           erc7579LaunchpadAddress: Safe7579Addresses.erc7579LaunchpadAddress,
           attesters: [
-            EthAddress('0x1111111111111111111111111111111111111111'),
+            EthereumAddress.fromHex('0x1111111111111111111111111111111111111111'),
           ],
           attestersThreshold: 1,
         );
@@ -927,7 +927,7 @@ void main() {
           erc7579LaunchpadAddress: Safe7579Addresses.erc7579LaunchpadAddress,
           validators: [
             Safe7579ModuleInit(
-              module: EthAddress('0xaaaa111111111111111111111111111111111111'),
+              module: EthereumAddress.fromHex('0xaaaa111111111111111111111111111111111111'),
             ),
           ],
         );
@@ -938,7 +938,7 @@ void main() {
           erc7579LaunchpadAddress: Safe7579Addresses.erc7579LaunchpadAddress,
           validators: [
             Safe7579ModuleInit(
-              module: EthAddress('0xbbbb222222222222222222222222222222222222'),
+              module: EthereumAddress.fromHex('0xbbbb222222222222222222222222222222222222'),
             ),
           ],
         );
