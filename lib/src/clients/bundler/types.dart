@@ -6,6 +6,9 @@ import '../../utils/parsing.dart';
 /// Contains the gas limits needed to execute a UserOperation.
 /// Fields vary slightly between EntryPoint v0.6 and v0.7.
 class UserOperationGasEstimate {
+  /// Creates a gas estimate with the given values.
+  ///
+  /// Use [UserOperationGasEstimate.fromJson] for parsing API responses.
   const UserOperationGasEstimate({
     required this.preVerificationGas,
     required this.verificationGasLimit,
@@ -14,6 +17,9 @@ class UserOperationGasEstimate {
     this.paymasterPostOpGasLimit,
   });
 
+  /// Creates a [UserOperationGasEstimate] from a JSON response.
+  ///
+  /// Parses the `eth_estimateUserOperationGas` RPC response.
   factory UserOperationGasEstimate.fromJson(Map<String, dynamic> json) =>
       UserOperationGasEstimate(
         preVerificationGas: parseBigInt(json['preVerificationGas']),
@@ -55,6 +61,9 @@ class UserOperationGasEstimate {
 ///
 /// Contains the UserOperation and its inclusion details.
 class UserOperationByHashResponse {
+  /// Creates a UserOperation lookup response.
+  ///
+  /// Use [UserOperationByHashResponse.fromJson] for parsing API responses.
   const UserOperationByHashResponse({
     required this.userOperation,
     required this.entryPoint,
@@ -63,6 +72,9 @@ class UserOperationByHashResponse {
     this.transactionHash,
   });
 
+  /// Creates a [UserOperationByHashResponse] from a JSON response.
+  ///
+  /// Parses the `eth_getUserOperationByHash` RPC response.
   factory UserOperationByHashResponse.fromJson(Map<String, dynamic> json) =>
       UserOperationByHashResponse(
         userOperation: json['userOperation'] as Map<String, dynamic>,
@@ -94,6 +106,9 @@ class UserOperationByHashResponse {
 ///
 /// Contains execution results and logs from the operation.
 class UserOperationReceipt {
+  /// Creates a UserOperation receipt with execution results.
+  ///
+  /// Use [UserOperationReceipt.fromJson] for parsing API responses.
   const UserOperationReceipt({
     required this.userOpHash,
     required this.sender,
@@ -106,6 +121,9 @@ class UserOperationReceipt {
     this.reason,
   });
 
+  /// Creates a [UserOperationReceipt] from a JSON response.
+  ///
+  /// Parses the `eth_getUserOperationReceipt` RPC response.
   factory UserOperationReceipt.fromJson(Map<String, dynamic> json) =>
       UserOperationReceipt(
         userOpHash: json['userOpHash'] as String,
@@ -155,6 +173,9 @@ class UserOperationReceipt {
 
 /// A log entry from UserOperation execution.
 class UserOperationLog {
+  /// Creates a log entry from UserOperation execution.
+  ///
+  /// Use [UserOperationLog.fromJson] for parsing API responses.
   const UserOperationLog({
     required this.address,
     required this.topics,
@@ -164,6 +185,9 @@ class UserOperationLog {
     this.logIndex,
   });
 
+  /// Creates a [UserOperationLog] from a JSON response.
+  ///
+  /// Parses log entries from UserOperation receipts.
   factory UserOperationLog.fromJson(Map<String, dynamic> json) =>
       UserOperationLog(
         address: EthereumAddress.fromHex(json['address'] as String),
@@ -199,6 +223,9 @@ class UserOperationLog {
 
 /// Transaction receipt from the underlying bundle transaction.
 class TransactionReceipt {
+  /// Creates a transaction receipt with the given details.
+  ///
+  /// Use [TransactionReceipt.fromJson] for parsing API responses.
   const TransactionReceipt({
     required this.transactionHash,
     required this.blockHash,
@@ -211,6 +238,9 @@ class TransactionReceipt {
     required this.logs,
   });
 
+  /// Creates a [TransactionReceipt] from a JSON response.
+  ///
+  /// Parses the receipt from `eth_getTransactionReceipt` RPC responses.
   factory TransactionReceipt.fromJson(Map<String, dynamic> json) =>
       TransactionReceipt(
         transactionHash: json['transactionHash'] as String,
@@ -261,6 +291,14 @@ class TransactionReceipt {
 /// ERC-4337 defines specific error codes (AA* codes) for different
 /// validation and execution failures.
 class BundlerRpcError implements Exception {
+  /// Creates a bundler RPC error with the given details.
+  ///
+  /// - [code]: The JSON-RPC error code (e.g., -32000 for execution errors)
+  /// - [message]: Human-readable error description
+  /// - [data]: Optional additional data, often contains AA* error codes
+  ///
+  /// Use [aaErrorCode] to extract ERC-4337 specific error codes like
+  /// "AA21" (insufficient funds) or "AA25" (invalid nonce).
   const BundlerRpcError({
     required this.code,
     required this.message,

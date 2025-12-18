@@ -9,6 +9,14 @@ import 'types.dart';
 /// Handles request/response formatting and error parsing for
 /// communicating with Ethereum nodes and ERC-4337 bundlers.
 class JsonRpcClient {
+  /// Creates a JSON-RPC client with the given configuration.
+  ///
+  /// Prefer using [createRpcClient] factory function for URL strings.
+  ///
+  /// - [url]: The RPC endpoint URI
+  /// - [httpClient]: Optional custom HTTP client (useful for testing)
+  /// - [headers]: Additional headers to include in requests
+  /// - [timeout]: Request timeout duration (default 30 seconds)
   JsonRpcClient({
     required this.url,
     http.Client? httpClient,
@@ -145,6 +153,7 @@ class JsonRpcClient {
 
 /// A single RPC request for batch operations.
 class RpcRequest {
+  /// Creates an RPC request with the given method and optional parameters.
   const RpcRequest(this.method, [this.params]);
 
   /// The RPC method name.

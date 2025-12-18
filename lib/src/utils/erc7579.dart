@@ -646,6 +646,12 @@ class UninstallModuleConfig {
 /// - Upper 192 bits: key (allows parallel transaction streams)
 /// - Lower 64 bits: sequence (increments for each transaction with same key)
 class DecodedNonce {
+  /// Creates a decoded nonce with the given key and sequence.
+  ///
+  /// This is returned by [decodeNonce] after splitting a 256-bit nonce.
+  ///
+  /// - [key]: The nonce key (upper 192 bits) for parallel transaction streams
+  /// - [sequence]: The sequence number (lower 64 bits) within that key
   const DecodedNonce({required this.key, required this.sequence});
 
   /// The nonce key (upper 192 bits).
@@ -712,6 +718,12 @@ BigInt encodeNonce({required BigInt key, required BigInt sequence}) {
 
 /// Result of decoding ERC-7579 execute call data.
 class Decoded7579Calls {
+  /// Creates a decoded ERC-7579 calls result.
+  ///
+  /// This is returned by [decode7579Calls] after parsing execute calldata.
+  ///
+  /// - [mode]: The execution mode (call type, revert behavior, etc.)
+  /// - [calls]: The decoded list of calls to execute
   const Decoded7579Calls({
     required this.mode,
     required this.calls,

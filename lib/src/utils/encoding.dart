@@ -84,34 +84,37 @@ class AbiEncoder {
 }
 
 /// Common function selectors for Safe contracts.
+///
+/// Contains 4-byte function selectors used for encoding Safe contract calls.
 class SafeSelectors {
   SafeSelectors._();
 
-  // Safe singleton functions
+  /// Selector for Safe singleton `setup` function.
   static final String setup = AbiEncoder.functionSelector(
     'setup(address[],uint256,address,bytes,address,address,uint256,address)',
   );
 
-  // Safe 4337 module functions
+  /// Selector for Safe 4337 module `executeUserOp` function.
   static final String executeUserOp = AbiEncoder.functionSelector(
     'executeUserOp(address,uint256,bytes,uint8)',
   );
 
+  /// Selector for Safe 4337 module `executeUserOpWithErrorString` function.
   static final String executeUserOpWithErrorString =
       AbiEncoder.functionSelector(
     'executeUserOpWithErrorString(address,uint256,bytes,uint8)',
   );
 
-  // Safe proxy factory functions
+  /// Selector for Safe proxy factory `createProxyWithNonce` function.
   static final String createProxyWithNonce = AbiEncoder.functionSelector(
     'createProxyWithNonce(address,bytes,uint256)',
   );
 
-  // Safe module setup functions
+  /// Selector for Safe module setup `enableModules` function.
   static final String enableModules =
       AbiEncoder.functionSelector('enableModules(address[])');
 
-  // MultiSend functions
+  /// Selector for MultiSend `multiSend` function.
   static final String multiSend =
       AbiEncoder.functionSelector('multiSend(bytes)');
 }
@@ -374,7 +377,13 @@ String encodePreValidationSetup({
 }
 
 /// Data structure for Safe 7579 initialization.
+///
+/// Contains all parameters needed to initialize a Safe account with
+/// ERC-7579 module support via the Safe7579 launchpad.
 class Safe7579InitData {
+  /// Creates initialization data for a Safe 7579 deployment.
+  ///
+  /// All fields correspond to the `InitData` struct in the Safe7579 launchpad.
   const Safe7579InitData({
     required this.singleton,
     required this.owners,
@@ -386,13 +395,28 @@ class Safe7579InitData {
     required this.callData,
   });
 
+  /// The Safe singleton (implementation) contract address.
   final EthereumAddress singleton;
+
+  /// List of initial Safe owners.
   final List<EthereumAddress> owners;
+
+  /// Number of required owner signatures for transactions.
   final BigInt threshold;
+
+  /// Address of the setup contract to delegate call during initialization.
   final EthereumAddress setupTo;
+
+  /// Calldata for the setup delegate call.
   final String setupData;
+
+  /// The Safe7579 adapter module address.
   final EthereumAddress safe7579;
+
+  /// List of ERC-7579 validators to install during initialization.
   final List<(EthereumAddress module, String initData)> validators;
+
+  /// Additional calldata to execute after Safe initialization.
   final String callData;
 }
 

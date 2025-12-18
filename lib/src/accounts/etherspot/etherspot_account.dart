@@ -17,6 +17,14 @@ import 'constants.dart';
 
 /// Configuration for creating an Etherspot smart account.
 class EtherspotSmartAccountConfig {
+  /// Creates a configuration for an Etherspot modular smart account.
+  ///
+  /// - [owner]: The account owner who controls the account
+  /// - [chainId]: Chain ID for the network
+  /// - [index]: Salt for deterministic address generation (defaults to 0)
+  /// - [customAddresses]: Optional custom contract addresses
+  /// - [publicClient]: For RPC-based address computation (recommended)
+  /// - [address]: Pre-computed address (alternative to publicClient)
   EtherspotSmartAccountConfig({
     required this.owner,
     required this.chainId,
@@ -55,14 +63,22 @@ class EtherspotSmartAccountConfig {
 
 /// Custom addresses for Etherspot contracts.
 class EtherspotCustomAddresses {
+  /// Creates custom contract addresses for Etherspot deployment.
+  ///
+  /// All fields are optional; defaults are used for any not provided.
   const EtherspotCustomAddresses({
     this.factory,
     this.bootstrap,
     this.ecdsaValidator,
   });
 
+  /// Custom factory address for account deployment.
   final EthereumAddress? factory;
+
+  /// Custom bootstrap contract address for initialization.
   final EthereumAddress? bootstrap;
+
+  /// Custom ECDSA validator module address.
   final EthereumAddress? ecdsaValidator;
 }
 
@@ -71,6 +87,10 @@ class EtherspotCustomAddresses {
 /// This implements the ERC-4337 smart account interface for Etherspot's
 /// modular wallet. It uses ERC-7579 for call encoding and EntryPoint v0.7.
 class EtherspotSmartAccount implements SmartAccount {
+  /// Creates an Etherspot smart account from the given configuration.
+  ///
+  /// Prefer using [createEtherspotSmartAccount] factory function instead
+  /// of calling this constructor directly.
   EtherspotSmartAccount(this._config);
 
   final EtherspotSmartAccountConfig _config;

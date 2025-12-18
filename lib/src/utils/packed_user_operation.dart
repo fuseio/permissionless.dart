@@ -22,6 +22,10 @@ import '../types/user_operation.dart';
 /// print('accountGasLimits: ${packed.accountGasLimits}');
 /// ```
 class PackedUserOperation {
+  /// Creates a packed UserOperation for on-chain use.
+  ///
+  /// Prefer using [getPackedUserOperation] to pack a [UserOperationV07]
+  /// rather than constructing this directly.
   const PackedUserOperation({
     required this.sender,
     required this.nonce,
@@ -190,6 +194,9 @@ String getPaymasterAndData(UserOperationV07 userOperation) {
 
 /// Result of unpacking initCode.
 class UnpackedInitCode {
+  /// Creates an unpacked initCode result.
+  ///
+  /// Both fields are null if the account is already deployed.
   const UnpackedInitCode({
     this.factory,
     this.factoryData,
@@ -228,12 +235,19 @@ UnpackedInitCode unpackInitCode(String initCode) {
 
 /// Result of unpacking accountGasLimits.
 class UnpackedAccountGasLimits {
+  /// Creates unpacked account gas limits.
+  ///
+  /// - [verificationGasLimit]: Gas for account validation
+  /// - [callGasLimit]: Gas for the execution call
   const UnpackedAccountGasLimits({
     required this.verificationGasLimit,
     required this.callGasLimit,
   });
 
+  /// Gas limit for account signature verification.
   final BigInt verificationGasLimit;
+
+  /// Gas limit for the execution call.
   final BigInt callGasLimit;
 }
 
@@ -260,12 +274,19 @@ UnpackedAccountGasLimits unpackAccountGasLimits(String accountGasLimits) {
 
 /// Result of unpacking gasFees.
 class UnpackedGasFees {
+  /// Creates unpacked gas fee values.
+  ///
+  /// - [maxPriorityFeePerGas]: Maximum priority fee (tip) per gas
+  /// - [maxFeePerGas]: Maximum total fee per gas
   const UnpackedGasFees({
     required this.maxPriorityFeePerGas,
     required this.maxFeePerGas,
   });
 
+  /// Maximum priority fee (tip) per gas unit.
   final BigInt maxPriorityFeePerGas;
+
+  /// Maximum total fee per gas unit (base fee + priority fee).
   final BigInt maxFeePerGas;
 }
 
@@ -292,6 +313,9 @@ UnpackedGasFees unpackGasFees(String gasFees) {
 
 /// Result of unpacking paymasterAndData.
 class UnpackedPaymasterAndData {
+  /// Creates unpacked paymaster data.
+  ///
+  /// All fields are null if no paymaster is used.
   const UnpackedPaymasterAndData({
     this.paymaster,
     this.paymasterVerificationGasLimit,

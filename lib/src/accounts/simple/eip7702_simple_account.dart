@@ -19,6 +19,12 @@ import 'constants.dart';
 ///
 /// This owner can sign both messages and EIP-7702 authorizations.
 abstract class Eip7702SimpleAccountOwner {
+  /// Creates an [Eip7702SimpleAccountOwner].
+  ///
+  /// Implementations must provide signing methods for messages, typed data,
+  /// and EIP-7702 authorizations.
+  const Eip7702SimpleAccountOwner();
+
   /// The Ethereum address of this owner (the EOA).
   EthereumAddress get address;
 
@@ -41,6 +47,15 @@ abstract class Eip7702SimpleAccountOwner {
 
 /// A local private key owner for EIP-7702 Simple accounts.
 class PrivateKeyEip7702Owner implements Eip7702SimpleAccountOwner {
+  /// Creates an owner from a hex-encoded private key.
+  ///
+  /// The [privateKeyHex] can optionally include the '0x' prefix.
+  ///
+  /// Example:
+  /// ```dart
+  /// final owner = PrivateKeyEip7702Owner('0xac0974...');
+  /// print(owner.address); // The EOA address derived from this key
+  /// ```
   PrivateKeyEip7702Owner(String privateKeyHex)
       : _privateKey = EthPrivateKey.fromHex(privateKeyHex),
         _privateKeyHex = privateKeyHex;
@@ -100,6 +115,15 @@ class PrivateKeyEip7702Owner implements Eip7702SimpleAccountOwner {
 
 /// Configuration for creating an EIP-7702 Simple smart account.
 class Eip7702SimpleSmartAccountConfig {
+  /// Creates a configuration for an EIP-7702 Simple smart account.
+  ///
+  /// Required parameters:
+  /// - [owner]: The EOA owner that controls this account
+  /// - [chainId]: The chain ID for signature domain separation
+  ///
+  /// Optional parameters:
+  /// - [publicClient]: Client for checking deployment status (EIP-1271)
+  /// - [accountLogicAddress]: Override the default Simple7702Account logic
   Eip7702SimpleSmartAccountConfig({
     required this.owner,
     required this.chainId,
@@ -151,6 +175,10 @@ class Eip7702SimpleSmartAccountConfig {
 /// final auth = await account.getAuthorization(nonce: BigInt.zero);
 /// ```
 class Eip7702SimpleSmartAccount implements Eip7702SmartAccount {
+  /// Creates an EIP-7702 Simple smart account from the given configuration.
+  ///
+  /// Prefer using [createEip7702SimpleSmartAccount] factory function instead
+  /// of calling this constructor directly.
   Eip7702SimpleSmartAccount(this._config);
 
   final Eip7702SimpleSmartAccountConfig _config;

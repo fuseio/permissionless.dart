@@ -16,6 +16,17 @@ import 'constants.dart';
 
 /// Configuration for creating a Thirdweb smart account.
 class ThirdwebSmartAccountConfig {
+  /// Creates a configuration for a Thirdweb smart account.
+  ///
+  /// Thirdweb accounts support both EntryPoint v0.6 and v0.7.
+  ///
+  /// - [owner]: The account owner who controls the account
+  /// - [chainId]: Chain ID for the network
+  /// - [salt]: Salt for deterministic address generation (defaults to "0x")
+  /// - [entryPointVersion]: EntryPoint version (defaults to v0.7)
+  /// - [nonceKey]: Custom nonce key for parallel transaction support
+  /// - [publicClient]: For RPC-based address computation (recommended)
+  /// - [address]: Pre-computed address (alternative to publicClient)
   ThirdwebSmartAccountConfig({
     required this.owner,
     required this.chainId,
@@ -67,6 +78,10 @@ class ThirdwebSmartAccountConfig {
 /// print('Thirdweb account: $address');
 /// ```
 class ThirdwebSmartAccount implements SmartAccount {
+  /// Creates a Thirdweb smart account from the given configuration.
+  ///
+  /// Prefer using [createThirdwebSmartAccount] factory function instead
+  /// of calling this constructor directly.
   ThirdwebSmartAccount(this._config)
       : _factoryAddress = _config.customFactoryAddress ??
             (_config.entryPointVersion == EntryPointVersion.v07

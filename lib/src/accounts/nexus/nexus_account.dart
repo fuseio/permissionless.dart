@@ -17,6 +17,16 @@ import 'constants.dart';
 
 /// Configuration for creating a Nexus smart account.
 class NexusSmartAccountConfig {
+  /// Creates a configuration for a Nexus (Biconomy ERC-7579) smart account.
+  ///
+  /// - [owner]: The account owner who controls the account
+  /// - [chainId]: Chain ID for the network
+  /// - [version]: Nexus version (defaults to "1.0.0")
+  /// - [index]: Salt for deterministic address generation (defaults to 0)
+  /// - [attesters]: Optional attesters for multi-sig validation
+  /// - [threshold]: Threshold for multi-sig (0 = disabled)
+  /// - [publicClient]: For RPC-based address computation (recommended)
+  /// - [address]: Pre-computed address (alternative to publicClient)
   NexusSmartAccountConfig({
     required this.owner,
     required this.chainId,
@@ -80,6 +90,10 @@ class NexusSmartAccountConfig {
 /// print('Nexus account: $address');
 /// ```
 class NexusSmartAccount implements SmartAccount {
+  /// Creates a Nexus smart account from the given configuration.
+  ///
+  /// Prefer using [createNexusSmartAccount] factory function instead
+  /// of calling this constructor directly.
   NexusSmartAccount(this._config)
       : _factoryAddress =
             _config.customFactoryAddress ?? NexusAddresses.k1ValidatorFactory,

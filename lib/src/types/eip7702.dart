@@ -27,6 +27,15 @@ import 'hex.dart';
 /// // Include auth in transaction to enable smart account features
 /// ```
 class Eip7702Authorization {
+  /// Creates an EIP-7702 authorization with the given parameters.
+  ///
+  /// Prefer using [Eip7702Authorization.sign] to create signed authorizations
+  /// from a private key, rather than constructing directly.
+  ///
+  /// - [chainId]: Chain ID this authorization is valid for (0 for any chain)
+  /// - [address]: Smart contract to delegate code execution to
+  /// - [nonce]: EOA's nonce to prevent replay attacks
+  /// - [v], [r], [s]: ECDSA signature components
   const Eip7702Authorization({
     required this.chainId,
     required this.address,

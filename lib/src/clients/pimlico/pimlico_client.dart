@@ -32,6 +32,10 @@ import 'types.dart';
 /// final status = await pimlico.getUserOperationStatus(hash);
 /// ```
 class PimlicoClient extends BundlerClient {
+  /// Creates a Pimlico client with the given RPC client and EntryPoint.
+  ///
+  /// Prefer using [createPimlicoClient] factory function instead of
+  /// calling this constructor directly, as it handles RPC client setup.
   PimlicoClient({
     required super.rpcClient,
     required super.entryPoint,

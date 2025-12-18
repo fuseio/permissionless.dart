@@ -27,6 +27,10 @@ enum GasSpeed {
 /// final buffered = estimate.withMultipliers(GasMultipliers.conservative);
 /// ```
 class GasMultipliers {
+  /// Creates gas multipliers with the given values.
+  ///
+  /// All multipliers default to 1.1 (10% buffer) except for preVerificationGas
+  /// which defaults to 1.0 (no buffer).
   const GasMultipliers({
     this.verificationGasLimit = 1.1,
     this.callGasLimit = 1.1,
@@ -128,6 +132,10 @@ extension GasEstimateMultipliers on UserOperationGasEstimate {
 ///
 /// Contains both maxFeePerGas and maxPriorityFeePerGas for EIP-1559.
 class FeeEstimate {
+  /// Creates a fee estimate with the given gas price values.
+  ///
+  /// - [maxFeePerGas]: Maximum total fee per gas unit
+  /// - [maxPriorityFeePerGas]: Maximum priority fee (tip) per gas unit
   const FeeEstimate({
     required this.maxFeePerGas,
     required this.maxPriorityFeePerGas,
@@ -157,6 +165,10 @@ class FeeEstimate {
 ///
 /// Helps users understand the maximum amount they might pay.
 class GasCostEstimate {
+  /// Creates a gas cost estimate with the given values.
+  ///
+  /// Prefer using [GasCostEstimate.calculate] factory to compute these
+  /// values from a [UserOperationGasEstimate] and gas price.
   const GasCostEstimate({
     required this.totalGasLimit,
     required this.maxGasCost,

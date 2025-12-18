@@ -37,5 +37,6 @@ bool isValidEthereumAddress(String address) =>
 
 /// Extension for converting strings to EthereumAddress.
 extension StringToAddress on String {
+  /// Converts this hex string to an [EthereumAddress].
   EthereumAddress toAddress() => EthereumAddress.fromHex(this);
 }

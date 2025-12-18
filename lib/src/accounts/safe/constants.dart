@@ -3,16 +3,26 @@ import '../../types/user_operation.dart';
 
 /// Safe smart account version.
 enum SafeVersion {
+  /// Safe version 1.4.1.
   v1_4_1('1.4.1'),
+
+  /// Safe version 1.5.0.
   v1_5_0('1.5.0');
 
   const SafeVersion(this.value);
 
+  /// The version string (e.g., "1.4.1").
   final String value;
 }
 
 /// Contract addresses for Safe smart accounts.
+///
+/// Contains all contract addresses needed to deploy and operate
+/// Safe smart accounts with ERC-4337 support.
 class SafeAddresses {
+  /// Creates a set of Safe contract addresses.
+  ///
+  /// All addresses are for a specific Safe version and EntryPoint combination.
   const SafeAddresses({
     required this.safeModuleSetupAddress,
     required this.safe4337ModuleAddress,
@@ -24,13 +34,28 @@ class SafeAddresses {
     this.safeP256VerifierAddress,
   });
 
+  /// Address of the Safe module setup contract for enabling 4337 module.
   final EthereumAddress safeModuleSetupAddress;
+
+  /// Address of the Safe 4337 module that handles UserOperation validation.
   final EthereumAddress safe4337ModuleAddress;
+
+  /// Address of the Safe proxy factory for deploying new accounts.
   final EthereumAddress safeProxyFactoryAddress;
+
+  /// Address of the Safe singleton (implementation) contract.
   final EthereumAddress safeSingletonAddress;
+
+  /// Address of the MultiSend contract for batched transactions.
   final EthereumAddress multiSendAddress;
+
+  /// Address of the MultiSendCallOnly contract (no delegate calls).
   final EthereumAddress multiSendCallOnlyAddress;
+
+  /// Address of the WebAuthn shared signer for passkey support.
   final EthereumAddress? webAuthnSharedSignerAddress;
+
+  /// Address of the P256 verifier contract for passkey signatures.
   final EthereumAddress? safeP256VerifierAddress;
 }
 
@@ -70,6 +95,10 @@ class Safe7579Addresses {
 /// Used to configure validators, executors, fallbacks, and hooks
 /// during Safe 7579 deployment.
 class Safe7579ModuleInit {
+  /// Creates a module initialization configuration.
+  ///
+  /// - [module]: The address of the ERC-7579 module to install
+  /// - [initData]: Optional initialization data for the module's `onInstall`
   const Safe7579ModuleInit({
     required this.module,
     this.initData = '0x',
@@ -88,6 +117,9 @@ class Safe7579ModuleInit {
 class SafeVersionAddresses {
   SafeVersionAddresses._();
 
+  /// Gets the contract addresses for a specific Safe and EntryPoint version.
+  ///
+  /// Returns `null` if the combination is not supported.
   static SafeAddresses? getAddresses(
     SafeVersion safeVersion,
     EntryPointVersion entryPointVersion,
@@ -176,11 +208,19 @@ class SafeVersionAddresses {
 }
 
 /// Operation types for Safe transactions.
+/// Operation type for Safe transactions.
+///
+/// Determines how the target contract is called.
 enum OperationType {
+  /// Regular call to target contract.
   call(0),
+
+  /// Delegate call (executes target code in Safe's context).
   delegateCall(1);
 
+  /// Creates an [OperationType] with the given numeric value.
   const OperationType(this.value);
 
+  /// The numeric value used in Safe transaction encoding.
   final int value;
 }

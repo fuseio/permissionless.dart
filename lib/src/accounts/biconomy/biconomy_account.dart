@@ -15,6 +15,18 @@ import 'constants.dart';
 /// Configuration for creating a Biconomy smart account.
 @Deprecated('Use NexusSmartAccountConfig instead')
 class BiconomySmartAccountConfig {
+  /// Creates a configuration for a Biconomy smart account.
+  ///
+  /// Required parameters:
+  /// - [owner]: The account owner that controls this smart account
+  /// - [chainId]: The chain ID for signature domain separation
+  ///
+  /// Optional parameters:
+  /// - [index]: Salt for deterministic address generation (defaults to 0)
+  /// - [customFactoryAddress]: Override the default factory address
+  /// - [customEcdsaModuleAddress]: Override the default ECDSA module address
+  /// - [publicClient]: Client for computing the account address via RPC
+  /// - [address]: Pre-computed account address to skip address derivation
   BiconomySmartAccountConfig({
     required this.owner,
     required this.chainId,
@@ -67,6 +79,13 @@ class BiconomySmartAccountConfig {
 /// ```
 @Deprecated('Use NexusSmartAccount instead')
 class BiconomySmartAccount implements SmartAccountV06 {
+  /// Creates a Biconomy smart account from the given configuration.
+  ///
+  /// Prefer using [createBiconomySmartAccount] factory function instead
+  /// of calling this constructor directly.
+  ///
+  /// The account uses the factory and ECDSA module addresses from the config,
+  /// or falls back to the default Biconomy addresses if not specified.
   BiconomySmartAccount(this._config)
       : _factoryAddress =
             _config.customFactoryAddress ?? BiconomyAddresses.factory,

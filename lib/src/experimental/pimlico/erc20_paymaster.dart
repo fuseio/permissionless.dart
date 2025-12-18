@@ -21,6 +21,10 @@ final EthereumAddress _mainnetUsdtAddress =
 
 /// Configuration for ERC-20 paymaster preparation.
 class Erc20PaymasterConfig {
+  /// Creates a configuration for ERC-20 paymaster preparation.
+  ///
+  /// - [balanceOverride]: Whether to simulate a large token balance
+  /// - [balanceSlot]: Custom storage slot for the balance mapping
   const Erc20PaymasterConfig({
     this.balanceOverride = false,
     this.balanceSlot,
@@ -40,6 +44,9 @@ class Erc20PaymasterConfig {
 
 /// Result of preparing a UserOperation for ERC-20 paymaster.
 class Erc20PaymasterResult {
+  /// Creates an ERC-20 paymaster preparation result.
+  ///
+  /// This is returned by [prepareUserOperationForErc20Paymaster].
   const Erc20PaymasterResult({
     required this.userOperation,
     required this.tokenQuote,
@@ -339,6 +346,9 @@ Future<Erc20CostEstimate> estimateErc20PaymasterCost({
 
 /// Estimated cost of a UserOperation in ERC-20 tokens.
 class Erc20CostEstimate {
+  /// Creates an ERC-20 cost estimate.
+  ///
+  /// This is returned by [estimateErc20PaymasterCost].
   const Erc20CostEstimate({
     required this.maxCostInToken,
     required this.exchangeRate,

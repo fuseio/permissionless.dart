@@ -104,8 +104,10 @@ class Hex {
   /// Empty hex value.
   static const String empty = '0x';
 
-  /// Zero bytes of various sizes.
+  /// 32 zero bytes (256 bits) as a hex string.
   static const String zero32 =
       '0x0000000000000000000000000000000000000000000000000000000000000000';
+
+  /// 20 zero bytes (160 bits) as a hex string, representing a null address.
   static const String zero20 = '0x0000000000000000000000000000000000000000';
 }
