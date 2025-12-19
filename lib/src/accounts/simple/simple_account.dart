@@ -14,6 +14,12 @@ import 'constants.dart';
 
 /// Configuration for creating a Simple smart account.
 class SimpleSmartAccountConfig {
+  /// Creates a configuration for a Simple smart account.
+  ///
+  /// - [owner]: The owner of this Simple account
+  /// - [chainId]: Chain ID for signature domain
+  /// - [entryPointVersion]: EntryPoint version (defaults to v0.7)
+  /// - [salt]: Salt for deterministic address generation (defaults to 0)
   SimpleSmartAccountConfig({
     required this.owner,
     required this.chainId,
@@ -71,6 +77,10 @@ class SimpleSmartAccountConfig {
 /// print('Simple account: $address');
 /// ```
 class SimpleSmartAccount implements SmartAccount {
+  /// Creates a Simple smart account from the given configuration.
+  ///
+  /// Prefer using [createSimpleSmartAccount] factory function instead
+  /// of calling this constructor directly.
   SimpleSmartAccount(this._config)
       : _factoryAddress = _config.customFactoryAddress ??
             SimpleAccountFactoryAddresses.fromVersion(

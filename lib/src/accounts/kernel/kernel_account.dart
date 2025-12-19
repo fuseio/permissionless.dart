@@ -17,6 +17,14 @@ import 'constants.dart';
 
 /// Configuration for creating a Kernel smart account.
 class KernelSmartAccountConfig {
+  /// Creates a configuration for a Kernel smart account.
+  ///
+  /// - [owner]: The account owner
+  /// - [chainId]: Chain ID for the network
+  /// - [version]: Kernel version (defaults to v0.3.1)
+  /// - [index]: Index/salt for address derivation (defaults to 0)
+  ///
+  /// Throws [ArgumentError] if version-specific requirements aren't met.
   KernelSmartAccountConfig({
     required this.owner,
     required this.chainId,
@@ -73,6 +81,10 @@ class KernelSmartAccountConfig {
 ///
 /// Supports both v0.2.x (EntryPoint v0.6) and v0.3.x (EntryPoint v0.7).
 class KernelSmartAccount implements SmartAccount {
+  /// Creates a Kernel smart account from the given configuration.
+  ///
+  /// Prefer using [createKernelSmartAccount] factory function instead
+  /// of calling this constructor directly.
   KernelSmartAccount(this._config)
       : _addresses = _config.customAddresses ??
             KernelVersionAddresses.getAddresses(_config.version)!;

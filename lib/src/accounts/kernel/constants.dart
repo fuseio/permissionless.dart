@@ -28,6 +28,12 @@ enum KernelVersion {
 
 /// Contract addresses for a Kernel deployment.
 class KernelAddresses {
+  /// Creates a set of Kernel contract addresses.
+  ///
+  /// - [accountImplementation]: The Kernel account implementation address
+  /// - [factory]: The factory contract for deploying accounts
+  /// - [metaFactory]: Meta factory for v0.3.x deployments (optional)
+  /// - [ecdsaValidator]: ECDSA validator address for v0.3.x (optional)
   const KernelAddresses({
     required this.accountImplementation,
     required this.factory,

@@ -15,6 +15,12 @@ import '../utils/message_hash.dart';
 /// - Raw hash signing for accounts like Kernel
 /// - EIP-712 typed data signing for accounts like Safe
 abstract class AccountOwner {
+  /// Creates an [AccountOwner].
+  ///
+  /// Implementations must provide all signing methods to support
+  /// various smart account signing requirements.
+  const AccountOwner();
+
   /// The Ethereum address of this owner.
   EthereumAddress get address;
 

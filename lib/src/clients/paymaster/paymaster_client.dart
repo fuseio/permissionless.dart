@@ -33,6 +33,10 @@ import 'types.dart';
 /// );
 /// ```
 class PaymasterClient {
+  /// Creates a paymaster client with the given RPC client.
+  ///
+  /// Prefer using [createPaymasterClient] factory function instead
+  /// of calling this constructor directly.
   PaymasterClient({
     required this.rpcClient,
   });

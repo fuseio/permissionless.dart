@@ -146,14 +146,28 @@ class UserOperationV06 implements UserOperation {
   final EthereumAddress sender;
   @override
   final BigInt nonce;
+
+  /// Factory and init code for account deployment (empty if already deployed).
   final String initCode;
   @override
   final String callData;
+
+  /// Gas limit for the execution call phase.
   final BigInt callGasLimit;
+
+  /// Gas limit for account signature verification.
   final BigInt verificationGasLimit;
+
+  /// Gas for bundler overhead and L1 data.
   final BigInt preVerificationGas;
+
+  /// Maximum total fee per gas unit (EIP-1559).
   final BigInt maxFeePerGas;
+
+  /// Maximum priority fee (tip) per gas unit (EIP-1559).
   final BigInt maxPriorityFeePerGas;
+
+  /// Paymaster address and data (empty if self-sponsored).
   final String paymasterAndData;
   @override
   final String signature;
@@ -285,18 +299,40 @@ class UserOperationV07 implements UserOperation {
   final EthereumAddress sender;
   @override
   final BigInt nonce;
+
+  /// Factory address for account deployment (null if already deployed).
   final EthereumAddress? factory;
+
+  /// Data passed to the factory for account creation.
   final String? factoryData;
   @override
   final String callData;
+
+  /// Gas limit for the execution call phase.
   final BigInt callGasLimit;
+
+  /// Gas limit for account signature verification.
   final BigInt verificationGasLimit;
+
+  /// Gas for bundler overhead and L1 data.
   final BigInt preVerificationGas;
+
+  /// Maximum total fee per gas unit (EIP-1559).
   final BigInt maxFeePerGas;
+
+  /// Maximum priority fee (tip) per gas unit (EIP-1559).
   final BigInt maxPriorityFeePerGas;
+
+  /// Paymaster contract address (null if self-sponsored).
   final EthereumAddress? paymaster;
+
+  /// Gas limit for paymaster signature verification.
   final BigInt? paymasterVerificationGasLimit;
+
+  /// Gas limit for paymaster postOp execution.
   final BigInt? paymasterPostOpGasLimit;
+
+  /// Data for the paymaster contract.
   final String? paymasterData;
   @override
   final String signature;

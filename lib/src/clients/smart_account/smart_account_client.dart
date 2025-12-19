@@ -15,6 +15,10 @@ import 'smart_account_interface.dart';
 /// For EIP-7702 accounts, this may include an authorization that must be
 /// submitted alongside the UserOperation.
 class PreparedUserOperation {
+  /// Creates a prepared UserOperation result.
+  ///
+  /// - [userOp]: The prepared but unsigned UserOperation
+  /// - [authorization]: Optional EIP-7702 authorization for first-time delegation
   const PreparedUserOperation({
     required this.userOp,
     this.authorization,
@@ -57,6 +61,14 @@ class PreparedUserOperation {
 /// final receipt = await client.waitForReceipt(hash);
 /// ```
 class SmartAccountClient {
+  /// Creates a smart account client with the given components.
+  ///
+  /// Prefer using [createSmartAccountClient] factory function instead.
+  ///
+  /// - [account]: The smart account implementation to use
+  /// - [bundler]: Bundler client for gas estimation and UserOp submission
+  /// - [publicClient]: Public client for nonce queries and deployment checks
+  /// - [paymaster]: Optional paymaster for sponsored/ERC-20 gas payment
   SmartAccountClient({
     required this.account,
     required this.bundler,

@@ -7,12 +7,18 @@ import '../bundler/types.dart';
 /// Provides more granular status than the standard bundler receipt,
 /// including states like queued, pending, and rejected.
 class PimlicoUserOperationStatus {
+  /// Creates a Pimlico UserOperation status.
+  ///
+  /// Use [PimlicoUserOperationStatus.fromJson] for parsing API responses.
   const PimlicoUserOperationStatus({
     required this.status,
     this.transactionHash,
     this.receipt,
   });
 
+  /// Creates a [PimlicoUserOperationStatus] from a JSON response.
+  ///
+  /// Parses the `pimlico_getUserOperationStatus` RPC response.
   factory PimlicoUserOperationStatus.fromJson(Map<String, dynamic> json) {
     final receiptJson = json['receipt'] as Map<String, dynamic>?;
 
@@ -62,11 +68,17 @@ class PimlicoUserOperationStatus {
 ///
 /// Contains EIP-1559 gas price values for a specific speed tier.
 class PimlicoGasPrice {
+  /// Creates a gas price tier with the given fee values.
+  ///
+  /// Use [PimlicoGasPrice.fromJson] for parsing API responses.
   const PimlicoGasPrice({
     required this.maxFeePerGas,
     required this.maxPriorityFeePerGas,
   });
 
+  /// Creates a [PimlicoGasPrice] from a JSON response.
+  ///
+  /// Parses a single gas price tier from `pimlico_getUserOperationGasPrice`.
   factory PimlicoGasPrice.fromJson(Map<String, dynamic> json) =>
       PimlicoGasPrice(
         maxFeePerGas: parseBigInt(json['maxFeePerGas']),
@@ -89,12 +101,18 @@ class PimlicoGasPrice {
 /// Provides three tiers of gas prices optimized for different
 /// confirmation speed requirements.
 class PimlicoGasPrices {
+  /// Creates gas price recommendations for all speed tiers.
+  ///
+  /// Use [PimlicoGasPrices.fromJson] for parsing API responses.
   const PimlicoGasPrices({
     required this.slow,
     required this.standard,
     required this.fast,
   });
 
+  /// Creates a [PimlicoGasPrices] from a JSON response.
+  ///
+  /// Parses the `pimlico_getUserOperationGasPrice` RPC response.
   factory PimlicoGasPrices.fromJson(Map<String, dynamic> json) =>
       PimlicoGasPrices(
         slow: PimlicoGasPrice.fromJson(json['slow'] as Map<String, dynamic>),
@@ -132,6 +150,9 @@ class PimlicoGasPrices {
 /// print('Post-op gas: ${quote.postOpGas}');
 /// ```
 class PimlicoTokenQuote {
+  /// Creates a token quote with exchange rate and gas information.
+  ///
+  /// Use [PimlicoTokenQuote.fromJson] for parsing API responses.
   const PimlicoTokenQuote({
     required this.token,
     required this.paymaster,
@@ -142,6 +163,9 @@ class PimlicoTokenQuote {
     this.allowanceSlot,
   });
 
+  /// Creates a [PimlicoTokenQuote] from a JSON response.
+  ///
+  /// Parses a single token quote from `pimlico_getTokenQuotes`.
   factory PimlicoTokenQuote.fromJson(Map<String, dynamic> json) =>
       PimlicoTokenQuote(
         token: EthereumAddress.fromHex(json['token'] as String),
@@ -213,6 +237,9 @@ class PimlicoTokenQuote {
 /// }
 /// ```
 class PimlicoSupportedToken {
+  /// Creates a supported token with its metadata.
+  ///
+  /// Use [PimlicoSupportedToken.fromJson] for parsing API responses.
   const PimlicoSupportedToken({
     required this.token,
     required this.name,
@@ -220,6 +247,9 @@ class PimlicoSupportedToken {
     required this.decimals,
   });
 
+  /// Creates a [PimlicoSupportedToken] from a JSON response.
+  ///
+  /// Parses a single token from `pimlico_getSupportedTokens`.
   factory PimlicoSupportedToken.fromJson(Map<String, dynamic> json) =>
       PimlicoSupportedToken(
         token: EthereumAddress.fromHex(json['token'] as String),
@@ -249,6 +279,9 @@ class PimlicoSupportedToken {
 /// Contains information about a validated sponsorship policy,
 /// including the policy author and description.
 class PimlicoSponsorshipPolicyData {
+  /// Creates sponsorship policy metadata.
+  ///
+  /// Use [PimlicoSponsorshipPolicyData.fromJson] for parsing API responses.
   const PimlicoSponsorshipPolicyData({
     required this.name,
     required this.author,
@@ -256,6 +289,9 @@ class PimlicoSponsorshipPolicyData {
     this.description,
   });
 
+  /// Creates a [PimlicoSponsorshipPolicyData] from a JSON response.
+  ///
+  /// Parses the nested `data` field from sponsorship policy responses.
   factory PimlicoSponsorshipPolicyData.fromJson(Map<String, dynamic> json) =>
       PimlicoSponsorshipPolicyData(
         name: json['name'] as String,
@@ -285,11 +321,17 @@ class PimlicoSponsorshipPolicyData {
 ///
 /// Links a policy ID to its metadata after validation.
 class PimlicoSponsorshipPolicy {
+  /// Creates a validated sponsorship policy result.
+  ///
+  /// Use [PimlicoSponsorshipPolicy.fromJson] for parsing API responses.
   const PimlicoSponsorshipPolicy({
     required this.sponsorshipPolicyId,
     required this.data,
   });
 
+  /// Creates a [PimlicoSponsorshipPolicy] from a JSON response.
+  ///
+  /// Parses a single policy from `pimlico_validateSponsorshipPolicies`.
   factory PimlicoSponsorshipPolicy.fromJson(Map<String, dynamic> json) =>
       PimlicoSponsorshipPolicy(
         sponsorshipPolicyId: json['sponsorshipPolicyId'] as String,
@@ -322,11 +364,17 @@ class PimlicoSponsorshipPolicy {
 /// print('Cost: ${cost.costInToken} tokens (~\$${cost.costInUsd / 1e8})');
 /// ```
 class PimlicoErc20PaymasterCost {
+  /// Creates an ERC-20 paymaster cost estimate.
+  ///
+  /// Use [PimlicoErc20PaymasterCost.fromJson] for parsing API responses.
   const PimlicoErc20PaymasterCost({
     required this.costInToken,
     required this.costInUsd,
   });
 
+  /// Creates a [PimlicoErc20PaymasterCost] from a JSON response.
+  ///
+  /// Parses the cost estimate from `pimlico_estimateErc20PaymasterCost`.
   factory PimlicoErc20PaymasterCost.fromJson(Map<String, dynamic> json) =>
       PimlicoErc20PaymasterCost(
         costInToken: parseBigInt(json['costInToken']),

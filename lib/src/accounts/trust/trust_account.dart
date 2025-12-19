@@ -16,6 +16,17 @@ import 'constants.dart';
 
 /// Configuration for creating a Trust smart account.
 class TrustSmartAccountConfig {
+  /// Creates a configuration for a Trust (Barz) smart account.
+  ///
+  /// Trust uses a diamond-based architecture and only supports EntryPoint v0.6.
+  ///
+  /// - [owner]: The account owner who controls the account
+  /// - [chainId]: Chain ID for the network
+  /// - [index]: Salt for deterministic address generation (defaults to 0)
+  /// - [customVerificationFacetAddress]: Custom verification facet address
+  /// - [nonceKey]: Custom nonce key for parallel transaction support
+  /// - [publicClient]: For RPC-based address computation (recommended)
+  /// - [address]: Pre-computed address (alternative to publicClient)
   TrustSmartAccountConfig({
     required this.owner,
     required this.chainId,
@@ -68,6 +79,10 @@ class TrustSmartAccountConfig {
 /// print('Trust account: $address');
 /// ```
 class TrustSmartAccount implements SmartAccountV06 {
+  /// Creates a Trust smart account from the given configuration.
+  ///
+  /// Prefer using [createTrustSmartAccount] factory function instead
+  /// of calling this constructor directly.
   TrustSmartAccount(this._config)
       : _factoryAddress =
             _config.customFactoryAddress ?? TrustAddresses.factory,

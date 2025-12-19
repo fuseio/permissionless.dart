@@ -18,6 +18,12 @@ import '../../types/user_operation.dart';
 /// }
 /// ```
 abstract class SmartAccount {
+  /// Creates a [SmartAccount].
+  ///
+  /// Implementations provide account-specific logic for address computation,
+  /// call encoding, and UserOperation signing.
+  const SmartAccount();
+
   /// Gets the deterministic address of this account.
   ///
   /// For CREATE2-based accounts, this can be computed before deployment.
@@ -102,6 +108,11 @@ abstract class SmartAccount {
 /// This interface is for accounts that use EntryPoint v0.6.
 /// For v0.7 accounts, use [SmartAccount] instead.
 abstract class SmartAccountV06 implements SmartAccount {
+  /// Creates a [SmartAccountV06].
+  ///
+  /// Implementations provide v0.6-specific UserOperation signing.
+  const SmartAccountV06();
+
   /// Signs a UserOperation v0.6 with this account's owner(s).
   ///
   /// Returns the signature to include in the UserOperation.
@@ -128,6 +139,12 @@ abstract class SmartAccountV06 implements SmartAccount {
 /// }
 /// ```
 abstract class Eip7702SmartAccount implements SmartAccount {
+  /// Creates an [Eip7702SmartAccount].
+  ///
+  /// Implementations provide EIP-7702 code delegation logic, where the
+  /// account address equals the owner's EOA address.
+  const Eip7702SmartAccount();
+
   /// The smart contract address that code is delegated to.
   ///
   /// This is the implementation contract that the EOA will execute code from

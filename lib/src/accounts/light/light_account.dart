@@ -14,6 +14,15 @@ import 'constants.dart';
 
 /// Configuration for creating a Light smart account.
 class LightSmartAccountConfig {
+  /// Creates a configuration for an Alchemy Light smart account.
+  ///
+  /// - [owner]: The account owner who controls the account
+  /// - [chainId]: Chain ID for signature domain
+  /// - [entryPointVersion]: EntryPoint version (defaults to v0.7)
+  /// - [version]: Light Account version (auto-selected based on EntryPoint)
+  /// - [salt]: Salt for deterministic address generation (defaults to 0)
+  /// - [publicClient]: For RPC-based address computation (recommended)
+  /// - [address]: Pre-computed address (alternative to publicClient)
   LightSmartAccountConfig({
     required this.owner,
     required this.chainId,
@@ -78,6 +87,10 @@ class LightSmartAccountConfig {
 /// print('Light account: $address');
 /// ```
 class LightSmartAccount implements SmartAccount {
+  /// Creates a Light smart account from the given configuration.
+  ///
+  /// Prefer using [createLightSmartAccount] factory function instead
+  /// of calling this constructor directly.
   LightSmartAccount(this._config)
       : _factoryAddress = _config.customFactoryAddress ??
             LightAccountFactoryAddresses.fromVersion(_config.version);

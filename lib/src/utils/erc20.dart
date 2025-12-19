@@ -191,6 +191,10 @@ BigInt decodeUint256Result(String hexResult) {
 /// Used in [StateOverride] to modify storage values during `eth_call` or
 /// `eth_estimateUserOperationGas` simulations.
 class StateDiff {
+  /// Creates a storage slot override.
+  ///
+  /// - [slot]: The storage slot to override (32-byte hex string)
+  /// - [value]: The value to set at this slot (32-byte hex string)
   const StateDiff({
     required this.slot,
     required this.value,
@@ -222,6 +226,13 @@ class StateDiff {
 /// );
 /// ```
 class StateOverride {
+  /// Creates a state override for simulation.
+  ///
+  /// - [address]: The address to override state for
+  /// - [balance]: Override the account's ETH balance
+  /// - [nonce]: Override the account's nonce
+  /// - [code]: Override the contract bytecode
+  /// - [stateDiff]: Override specific storage slots
   const StateOverride({
     required this.address,
     this.balance,

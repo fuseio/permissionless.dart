@@ -20,6 +20,12 @@ import 'constants.dart';
 ///
 /// This owner can sign messages, typed data, and EIP-7702 authorizations.
 abstract class Eip7702KernelOwner {
+  /// Creates an [Eip7702KernelOwner].
+  ///
+  /// Implementations must provide signing methods for messages, typed data,
+  /// and EIP-7702 authorizations.
+  const Eip7702KernelOwner();
+
   /// The Ethereum address of this owner (the EOA).
   EthereumAddress get address;
 
@@ -39,6 +45,15 @@ abstract class Eip7702KernelOwner {
 
 /// A local private key owner for EIP-7702 Kernel accounts.
 class PrivateKeyEip7702KernelOwner implements Eip7702KernelOwner {
+  /// Creates an owner from a hex-encoded private key.
+  ///
+  /// The [privateKeyHex] can optionally include the '0x' prefix.
+  ///
+  /// Example:
+  /// ```dart
+  /// final owner = PrivateKeyEip7702KernelOwner('0xac0974...');
+  /// print(owner.address); // The EOA address derived from this key
+  /// ```
   PrivateKeyEip7702KernelOwner(String privateKeyHex)
       : _privateKey = EthPrivateKey.fromHex(privateKeyHex),
         _privateKeyHex = privateKeyHex;
@@ -100,6 +115,19 @@ class PrivateKeyEip7702KernelOwner implements Eip7702KernelOwner {
 
 /// Configuration for creating an EIP-7702 Kernel smart account.
 class Eip7702KernelSmartAccountConfig {
+  /// Creates a configuration for an EIP-7702 Kernel smart account.
+  ///
+  /// Required parameters:
+  /// - [owner]: The EOA owner that controls this account
+  /// - [chainId]: The chain ID for signature domain separation
+  ///
+  /// Optional parameters:
+  /// - [version]: Kernel version (must support EIP-7702, defaults to v0.3.3)
+  /// - [publicClient]: Client for checking deployment status (EIP-1271)
+  /// - [accountLogicAddress]: Override the default Kernel implementation
+  /// - [ecdsaValidatorAddress]: Override the default ECDSA validator
+  ///
+  /// Throws [ArgumentError] if the specified version doesn't support EIP-7702.
   Eip7702KernelSmartAccountConfig({
     required this.owner,
     required this.chainId,
@@ -167,6 +195,10 @@ class Eip7702KernelSmartAccountConfig {
 /// final auth = await account.getAuthorization(nonce: BigInt.zero);
 /// ```
 class Eip7702KernelSmartAccount implements Eip7702SmartAccount {
+  /// Creates an EIP-7702 Kernel smart account from the given configuration.
+  ///
+  /// Prefer using [createEip7702KernelSmartAccount] factory function instead
+  /// of calling this constructor directly.
   Eip7702KernelSmartAccount(this._config);
 
   final Eip7702KernelSmartAccountConfig _config;

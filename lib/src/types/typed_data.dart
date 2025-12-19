@@ -15,6 +15,9 @@ import 'address.dart';
 /// );
 /// ```
 class TypedDataDomain {
+  /// Creates an EIP-712 domain separator.
+  ///
+  /// At least one field should be specified to prevent signature replay.
   const TypedDataDomain({
     this.name,
     this.version,
@@ -55,6 +58,11 @@ class TypedDataDomain {
 /// final field = TypedDataField(name: 'from', type: 'address');
 /// ```
 class TypedDataField {
+  /// Creates an EIP-712 type field definition.
+  ///
+  /// - [name]: The field name as it appears in the struct
+  /// - [type]: The Solidity type (e.g., 'address', 'uint256', 'bytes32',
+  ///   or a custom type name defined in the types map)
   const TypedDataField({
     required this.name,
     required this.type,
@@ -113,6 +121,12 @@ class TypedDataField {
 /// );
 /// ```
 class TypedData {
+  /// Creates an EIP-712 typed data structure for signing.
+  ///
+  /// - [domain]: The domain separator parameters
+  /// - [types]: Type definitions for all custom types used in the message
+  /// - [primaryType]: The name of the primary type being signed
+  /// - [message]: The actual message data conforming to [primaryType]
   const TypedData({
     required this.domain,
     required this.types,

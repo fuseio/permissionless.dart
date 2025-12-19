@@ -28,6 +28,13 @@ import 'types.dart';
 /// final receipt = await client.waitForUserOperationReceipt(hash);
 /// ```
 class BundlerClient {
+  /// Creates a bundler client with the given RPC client and EntryPoint.
+  ///
+  /// Prefer using [createBundlerClient] factory function instead of
+  /// calling this constructor directly, as it handles RPC client setup.
+  ///
+  /// - [rpcClient]: The JSON-RPC client for bundler communication
+  /// - [entryPoint]: The EntryPoint contract address (v0.6 or v0.7)
   BundlerClient({
     required this.rpcClient,
     required this.entryPoint,

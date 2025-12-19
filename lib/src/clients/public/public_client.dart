@@ -29,6 +29,10 @@ import 'types.dart';
 /// final feeData = await public.getFeeData();
 /// ```
 class PublicClient {
+  /// Creates a public client with the given RPC client.
+  ///
+  /// Prefer using [createPublicClient] factory function instead of
+  /// calling this constructor directly, as it handles RPC client setup.
   PublicClient({
     required this.rpcClient,
   });

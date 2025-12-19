@@ -27,6 +27,10 @@ import 'types.dart';
 /// print('Max fee: ${gasPrice.maxFeePerGas}');
 /// ```
 class EtherspotClient extends BundlerClient {
+  /// Creates an Etherspot bundler client with Skandha extensions.
+  ///
+  /// Prefer using [createEtherspotClient] factory function instead
+  /// of calling this constructor directly.
   EtherspotClient({
     required super.rpcClient,
     required super.entryPoint,

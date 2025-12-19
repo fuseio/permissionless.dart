@@ -23,6 +23,16 @@ const String _proxyCreationCode =
 
 /// Configuration parameters for creating a Safe smart account.
 class SafeSmartAccountConfig {
+  /// Creates a configuration for a Safe smart account.
+  ///
+  /// - [owners]: The owner(s) of the Safe (at least one required)
+  /// - [threshold]: Number of signatures required (defaults to 1)
+  /// - [version]: Safe version to use (defaults to v1.4.1)
+  /// - [entryPointVersion]: EntryPoint version (defaults to v0.7)
+  /// - [saltNonce]: Salt for deterministic address generation
+  /// - [chainId]: Chain ID for signature domain
+  ///
+  /// Throws [ArgumentError] if no owners provided or threshold is invalid.
   SafeSmartAccountConfig({
     required this.owners,
     BigInt? threshold,
@@ -134,6 +144,10 @@ class SafeSmartAccountConfig {
 
 /// A Safe smart account implementation for ERC-4337.
 class SafeSmartAccount implements SmartAccount {
+  /// Creates a Safe smart account from the given configuration.
+  ///
+  /// Prefer using [createSafeSmartAccount] factory function instead
+  /// of calling this constructor directly.
   SafeSmartAccount(this._config) : _addresses = _resolveAddresses(_config);
 
   final SafeSmartAccountConfig _config;
